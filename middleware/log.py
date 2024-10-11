@@ -182,7 +182,8 @@ class APIGatewayMiddleware(BaseHTTPMiddleware):
                 })
                 response = JSONResponse(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    content={"detail": "Internal Server Error"}
+                    #content={"detail": "Internal Server Error"}
+                    content={"detail": str(response.body)}
                 )
             # run background task to write log
             background_tasks = BackgroundTasks() 

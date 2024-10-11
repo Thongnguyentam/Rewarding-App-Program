@@ -7,8 +7,8 @@ class SysUser(Base):
     id = Column(Integer, primary_key = True, index = True)
     username = Column(String(255))
     balance = Column(Integer)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime, server_default=func.now(), nullable=False)
     
 class UserPayer(Base):
     __tablename__ = "USER_PAYER"

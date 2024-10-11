@@ -68,6 +68,126 @@ cd Rewarding-App-Program
 ```bash
 docker-compose up --build
 ```
+4. Log in to PgAdmin at `http://localhost:5050`
+    + Username: admin@admin.com
+    + Password: root
+
+5. Connect to Postgres database
+    + Find the `CONTAINER ID` with the IMAGE `postgres`:
+        ```bash
+        docker container ls
+        ```
+    + Find IP address of the database server:
+        ```bash
+        docker inspect <CONTAINER ID>
+        ```
+    + In General tab of pgAdmin, set the server name
+    + In Connection tab:
+        + Hostname/ IP address: found in the previous step
+        + Port: 5432
+        + Maintainance database: postgres
+        + Username: postgres
+        + Password: 123456
+
+6. Create the first user (**required**)
+    + Call the API to create your user (*Note: For demonstration purpose, just use this endpoint once.)
+    + See below
+
+## Endpoints (using port 8000)
+
+### Add user (use one time ONLY, you will continue to use this user to add and spend points)
+`POST` `http://localhost:8000/new-user`
+
+Example request:
+```
+{
+    "username": "user"
+}
+```
+
+Example response:
+```
+{
+    "created_at": "2024-10-11T03:41:50.689551",
+    "updated_at": "2024-10-11T03:41:50.689551",
+    "balance": 0,
+    "username": "user",
+    "id": 1
+}
+```
+
+### Get Point Balance
+`GET` `http://localhost:8000/balance`
+
+Example response:
+```
+{
+    "DANNON": 1000,
+    "UNILEVER" : 0,
+    "MILLER COORS": 5300
+}
+```
+
+### Add Points
+`POST` `http://localhost:8000/add`
+
+```
+BODY content-type = application/x-www-form-urlencoded
+
+Key | Validation Rules
+
+payer | string, required
+points | integer, required
+timestamp | Iso-8601 format, required 
+```
+Example request:
+{
+    "payer" : "DANNON",
+    "points" : 5000,
+    "timestamp" : "2020-11-02T14:00:00Z"
+}
+
+Example response:
+```
+{
+    "detail": "Successfully added points"
+}
+```
+
+### Spend Points (The user will spend the oldest points they get from specific payers)
+`POST` `http://localhost:8000/spend`
+```
+BODY content-type = application/x-www-form-urlencoded
+
+Key | Validation Rules
+
+points | integer, required
+```
+Example request:
+{
+    "points" : 13500
+}
+
+Example response:
+```
+[
+    {
+        "payer": "DANNON",
+        "points": -12000
+    },
+    {
+        "payer": "UNI",
+        "points": -1500
+    }
+]
+```
+
+*NOTE*: If user spends more points than they currently have, they will get an error
+```
+{
+    "detail": "You don't have enough points"
+}
+```
 
 ## Authors
 - Dylan Nguyen (Thong Nguyen)- thongnguyentam@gmail.com
