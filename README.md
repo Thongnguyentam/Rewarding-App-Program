@@ -95,7 +95,7 @@ docker-compose up --build
 
 ## Endpoints (using port 8000)
 
-### Add user (use one time ONLY, you will continue to use this user to add and spend points)
+### Add user (use one time ONLY)
 `POST` `http://localhost:8000/new-user`
 
 Example request:
@@ -115,24 +115,12 @@ Example response:
     "id": 1
 }
 ```
-
-### Get Point Balance
-`GET` `http://localhost:8000/balance`
-
-Example response:
-```
-{
-    "DANNON": 1000,
-    "UNILEVER" : 0,
-    "MILLER COORS": 5300
-}
-```
-
+*NOTE*: After creating your first user, you will use this account for all future point-related operations (e.g., adding and spending points).
 ### Add Points
 `POST` `http://localhost:8000/add`
 
 ```
-BODY content-type = application/x-www-form-urlencoded
+BODY Content-Type: application/json
 
 Key | Validation Rules
 
@@ -141,11 +129,13 @@ points | integer, required
 timestamp | Iso-8601 format, required 
 ```
 Example request:
+```
 {
     "payer" : "DANNON",
     "points" : 5000,
     "timestamp" : "2020-11-02T14:00:00Z"
 }
+```
 
 Example response:
 ```
@@ -157,16 +147,18 @@ Example response:
 ### Spend Points (The user will spend the oldest points they get from specific payers)
 `POST` `http://localhost:8000/spend`
 ```
-BODY content-type = application/x-www-form-urlencoded
+BODY Content-Type: application/json
 
 Key | Validation Rules
 
 points | integer, required
 ```
 Example request:
+```
 {
     "points" : 13500
 }
+```
 
 Example response:
 ```
@@ -181,6 +173,16 @@ Example response:
     }
 ]
 ```
+### Get Point Balance
+`GET` `http://localhost:8000/balance`
+
+Example response:
+```
+{
+    "DANNON": 0,
+    "UNI": 500
+}
+```
 
 *NOTE*: If user spends more points than they currently have, they will get an error
 ```
@@ -189,5 +191,5 @@ Example response:
 }
 ```
 
-## Authors
+## Author(s)
 - Dylan Nguyen (Thong Nguyen)- thongnguyentam@gmail.com
