@@ -90,7 +90,7 @@ docker-compose up --build
         + Password: 123456
 
 6. Create the first user (**required**)
-    + Call the API to create your user (*Note: For demonstration purpose, just use this endpoint once.)
+    + Call the API to create your user (*NOTE*: For demonstration purpose, just use this endpoint once.)
     + See below
 
 ## Endpoints (using port 8000)
