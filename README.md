@@ -61,7 +61,7 @@ git clone https://github.com/Thongnguyentam/Rewarding-App-Program.git
 ```
 2. Navigate into the project directory:
 ```bash
-cd Fetch
+cd Rewarding-App-Program
 ```
 
 3. Run the application using Docker
