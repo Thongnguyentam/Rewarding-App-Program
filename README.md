@@ -1,4 +1,4 @@
-# Fetch Loyalty & Reward RESTApi  
+# Fetch Loyalty & Reward RESTApis
 
 ## Description
 Our users have points in their accounts. Users only see a single balance in their account, but for reporting
@@ -57,33 +57,17 @@ spends their points on a reward.
 Follow these steps to install and run the project:
 1. Clone the project from its repository:
 ```bash
-git clone 
+git clone https://github.com/Thongnguyentam/Rewarding-App-Program.git
 ```
 2. Navigate into the project directory:
 ```bash
 cd Fetch
 ```
-3. Create virtual environment
-```bash
-python -m venv env
-```
 
-4. Active virtual environment
+3. Run the application using Docker
 ```bash
-env/Scripts/activate
+docker-compose up --build
 ```
-
-5. Install the required Python packages.
-```bash
-pip install -r requirements.txt
-```
-
-6. Run the FastAPI server:
-```bash
-uvicorn main:app --reload
-```
-
-SQLALCHEMY_DATABASE_URL: postgreql://{user}:{pass}@{hostname}:{port}/{database_name} (Connection Chain to Postgresql Database)
 
 ## Authors
 - Dylan Nguyen (Thong Nguyen)- thongnguyentam@gmail.com
