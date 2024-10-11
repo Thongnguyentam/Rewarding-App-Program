@@ -95,7 +95,7 @@ docker-compose up --build
 
 ## Endpoints (using port 8000)
 
-### Add user (use one time ONLY)
+### Add user (use one time ONLY, you will continue to use this user to add and spend points)
 `POST` `http://localhost:8000/new-user`
 
 Example request:
@@ -108,8 +108,8 @@ Example request:
 Example response:
 ```
 {
-    "updated_at": null,
-    "created_at": null,
+    "created_at": "2024-10-11T03:41:50.689551",
+    "updated_at": "2024-10-11T03:41:50.689551",
     "balance": 0,
     "username": "user",
     "id": 1
