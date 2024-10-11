@@ -1,7 +1,14 @@
 from datetime import datetime
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from database.models.user import UserPayer
+from database.models.user import SysUser, UserPayer
+from schemas.user import CreateUserDTO
+
+async def add_user(db:Session, new_user:CreateUserDTO):
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
 
 async def add_user_payer(db: Session, user_payer: UserPayer):
     db.add(user_payer)

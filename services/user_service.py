@@ -1,13 +1,17 @@
 from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from database.models.user import UserPayer
-from database.query.db_user import add_user_payer, get_user_payer_points_by_payer_id, update_user_payer, get_user_payers
+from database.models.user import SysUser, UserPayer
+from database.query.db_user import add_user, add_user_payer, get_user_payer_points_by_payer_id, update_user_payer, get_user_payers
 from database.query.db_payer import get_payer_by_name, add_payer, get_payer_list_by_user_id, get_spent_payers_by_user_id
-from schemas.user import AddPointRequest, SpendPointRequest, SpendPointResponse
+from schemas.user import AddPointRequest, CreateUserDTO, SpendPointRequest, SpendPointResponse
 from schemas.payer import NewPayerDTO
 from constant import response_message
 from sqlalchemy.exc import SQLAlchemyError
+
+async def create_user(db:Session, request:CreateUserDTO) -> SysUser:
+    new_user = SysUser(username=request.username,balance=request.balance)
+    return await add_user(db=db, new_user=new_user)
 
 async def add_points_service(request: AddPointRequest, current_user_id: int, db: Session):
     # check the format of the request
