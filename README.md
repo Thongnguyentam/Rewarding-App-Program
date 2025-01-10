@@ -57,7 +57,7 @@ spends their points on a reward.
 Follow these steps to install and run the project:
 1. Clone the project from its repository:
 ```bash
-git clone https://github.com/Thongnguyentam/Rewarding-App-Program.git
+git clone https://github.com/Thongnguyentam/Rewarding-App-Program.t
 ```
 2. Navigate into the project directory:
 ```bash

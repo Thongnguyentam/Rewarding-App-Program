@@ -40,6 +40,7 @@ async def get_spent_payers_by_user_id(db: Session, user_id: int, spent_points: i
         .all()
     )
 
+    # not enough point
     if not payer_user_list or payer_user_list[-1].total_points < spent_points:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, 

@@ -1,0 +1,65 @@
+action_datetime,path_name,method,ip,status_response,response,description,request_body,request_query,duration
+2024-10-21 19:44:52,/new-user,POST,127.0.0.1,200,"{""id"":1,""username"":""user"",""balance"":0,""created_at"":""2024-10-21T19:44:52.841394"",""updated_at"":""2024-10-21T19:44:52.841394""}",,"{""username"": ""user""}","{'path': {}, 'query': {}}",0.012
+2024-10-22 00:47:20,/add,POST,127.0.0.1,500,{'detail': 'Internal Server Error'},,"{
+    ""payer"" : ""DANNON"",
+    ""points"" : 300,
+    ""timestamp"" : ""2022-10-31T10:00:00Z""
+}","{'path': {}, 'query': {}}",0.0
+2024-10-22 00:52:45,/add,POST,127.0.0.1,500,{'detail': 'Internal Server Error'},,"{
+    ""payer"" : ""DANNON"",
+    ""points"" : 300,
+    ""timestamp"" : ""2022-10-31T10:00:00Z""
+}","{'path': {}, 'query': {}}",0.0
+2024-10-22 00:53:26,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 300, ""timestamp"": ""2022-10-31T10:00:00Z""}","{'path': {}, 'query': {}}",0.013
+2024-10-22 00:56:51,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""UNILEVER"", ""points"": 200, ""timestamp"": ""2022-10-31T11:00:00Z""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 00:58:34,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": -200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.032
+2024-10-22 00:59:12,/new-user,POST,127.0.0.1,200,"{""id"":2,""username"":""user"",""balance"":0,""created_at"":""2024-10-22T00:59:12.513210"",""updated_at"":""2024-10-22T00:59:12.513210""}",,"{""username"": ""user""}","{'path': {}, 'query': {}}",0.005
+2024-10-22 00:59:31,/new-user,POST,127.0.0.1,200,"{""id"":3,""username"":""user"",""balance"":0,""created_at"":""2024-10-22T00:59:31.858223"",""updated_at"":""2024-10-22T00:59:31.858223""}",,"{""username"": ""user""}","{'path': {}, 'query': {}}",0.004
+2024-10-22 00:59:51,/add,POST,127.0.0.1,400,"{""detail"":""You don't have enough points""}",,"{""payer"": ""DANNON"", ""points"": -200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.004
+2024-10-22 00:59:57,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.005
+2024-10-22 01:01:10,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 300, ""timestamp"": ""2022-10-31T10:00:00Z""}","{'path': {}, 'query': {}}",0.007
+2024-10-22 01:01:45,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""UNILEVER"", ""points"": 200, ""timestamp"": ""2022-10-31T11:00:00Z""}","{'path': {}, 'query': {}}",0.005
+2024-10-22 01:02:08,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": -200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.004
+2024-10-22 01:02:55,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""MILLER COORS"", ""points"": 10000, ""timestamp"": ""2022-11-01T14:00:00Z""}","{'path': {}, 'query': {}}",0.007
+2024-10-22 01:04:09,/add,POST,127.0.0.1,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 1000, ""timestamp"": ""2022-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.005
+2024-10-22 01:07:14,/update-point-record,PUT,127.0.0.1,422,"{""detail"":[{""loc"":[""body"",""points""],""msg"":""field required"",""type"":""value_error.missing""},{""loc"":[""body"",""timestamp""],""msg"":""field required"",""type"":""value_error.missing""}]}",,"{""user_id"": 3, ""payer"": ""DANNON""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 01:07:57,/update-point-record,PUT,127.0.0.1,200,"{""detail"":""Successfully updated points""}",,"{""user_id"": 3, ""payer"": ""DANNON"", ""points"": 200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.019
+2024-10-22 01:08:22,/update-point-record,PUT,127.0.0.1,404,"{""detail"":""Payer Not Found""}",,"{""user_id"": 1, ""payer"": ""Cu"", ""points"": 200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.003
+2024-10-22 01:08:34,/update-point-record,PUT,127.0.0.1,200,"{""detail"":""Successfully updated points""}",,"{""user_id"": 1, ""payer"": ""DANNON"", ""points"": 200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.032
+2024-10-22 13:07:50,/balance,GET,testclient,200,"{""DANNON"":5000}",,,"{'path': {}, 'query': {}}",0.004
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.007
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": -4000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 13:07:50,/balance,GET,testclient,200,"{""DANNON"":1000}",,,"{'path': {}, 'query': {}}",0.004
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.009
+2024-10-22 13:07:50,/add,POST,testclient,400,"{""detail"":""You don't have enough points""}",,"{""payer"": ""DANNON"", ""points"": -6000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.006
+2024-10-22 13:07:50,/balance,GET,testclient,200,"{""DANNON"":5000}",,,"{'path': {}, 'query': {}}",0.004
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.009
+2024-10-22 13:07:50,/spend,POST,testclient,500,{'detail': 'Internal Server Error'},"{""detail"":""update_user_payer() got an unexpected keyword argument 'payer_user_id'""}","{""points"": 4000}","{'path': {}, 'query': {}}",0.015
+2024-10-22 13:07:50,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:50,/spend,POST,testclient,500,{'detail': 'Internal Server Error'},"{""detail"":""update_user_payer() got an unexpected keyword argument 'payer_user_id'""}","{""points"": 5000}","{'path': {}, 'query': {}}",0.004
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-03T14:00:00Z""}","{'path': {}, 'query': {}}",0.013
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 2000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 13:07:51,/spend,POST,testclient,500,{'detail': 'Internal Server Error'},"{""detail"":""update_user_payer() got an unexpected keyword argument 'payer_user_id'""}","{""points"": 4700}","{'path': {}, 'query': {}}",0.014
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-04T14:00:00Z""}","{'path': {}, 'query': {}}",0.014
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""UNILEVER"", ""points"": 1000, ""timestamp"": ""2020-11-03T14:00:00Z""}","{'path': {}, 'query': {}}",0.012
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 2000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 13:07:51,/spend,POST,testclient,500,{'detail': 'Internal Server Error'},"{""detail"":""update_user_payer() got an unexpected keyword argument 'payer_user_id'""}","{""points"": 1000}","{'path': {}, 'query': {}}",0.011
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-03T14:00:00Z""}","{'path': {}, 'query': {}}",0.008
+2024-10-22 13:07:51,/spend,POST,testclient,400,"{""detail"":""You don't have enough points""}",,"{""points"": 6000}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:51,/balance,GET,testclient,200,"{""DANNON"":5000}",,,"{'path': {}, 'query': {}}",0.005
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""2020-11-04T14:00:00Z""}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""UNILEVER"", ""points"": 1000, ""timestamp"": ""2020-11-04T14:00:00Z""}","{'path': {}, 'query': {}}",0.006
+2024-10-22 13:07:51,/spend,POST,testclient,400,"{""detail"":""You don't have enough points""}",,"{""points"": 7000}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:51,/balance,GET,testclient,200,"{""DANNON"":5000,""UNILEVER"":1000}",,,"{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 300, ""timestamp"": ""2022-10-31T10:00:00Z""}","{'path': {}, 'query': {}}",0.005
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""UNILEVER"", ""points"": 200, ""timestamp"": ""2022-10-31T11:00:00Z""}","{'path': {}, 'query': {}}",0.011
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": -200, ""timestamp"": ""2022-10-31T15:00:00Z""}","{'path': {}, 'query': {}}",0.009
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""MILLER COORS"", ""points"": 10000, ""timestamp"": ""2022-11-01T14:00:00Z""}","{'path': {}, 'query': {}}",0.007
+2024-10-22 13:07:51,/add,POST,testclient,200,"{""detail"":""Successfully added points""}",,"{""payer"": ""DANNON"", ""points"": 1000, ""timestamp"": ""2022-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.011
+2024-10-22 13:07:51,/balance,GET,testclient,200,"{""DANNON"":1100,""UNILEVER"":200,""MILLER COORS"":10000}",,,"{'path': {}, 'query': {}}",0.007
+2024-10-22 13:07:51,/spend,POST,testclient,500,{'detail': 'Internal Server Error'},"{""detail"":""update_user_payer() got an unexpected keyword argument 'payer_user_id'""}","{""points"": 5000}","{'path': {}, 'query': {}}",0.005
+2024-10-22 13:07:51,/add,POST,testclient,422,"{""detail"":""Invalid timestamp""}",,"{""payer"": ""DANNON"", ""points"": 5000, ""timestamp"": ""invalid-timestamp""}","{'path': {}, 'query': {}}",0.0
+2024-10-22 13:07:51,/add,POST,testclient,422,"{""detail"":[{""loc"":[""body"",""payer""],""msg"":""field required"",""type"":""value_error.missing""}]}",,"{""points"": 5000, ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.007
+2024-10-22 13:07:51,/add,POST,testclient,422,"{""detail"":[{""loc"":[""body"",""points""],""msg"":""field required"",""type"":""value_error.missing""}]}",,"{""payer"": ""DANNON"", ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.004
+2024-10-22 13:07:51,/add,POST,testclient,422,"{""detail"":[{""loc"":[""body"",""points""],""msg"":""value is not a valid integer"",""type"":""type_error.integer""}]}",,"{""payer"": ""DANNON"", ""points"": ""invalid_points"", ""timestamp"": ""2020-11-02T14:00:00Z""}","{'path': {}, 'query': {}}",0.009

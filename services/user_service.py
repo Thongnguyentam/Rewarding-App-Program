@@ -2,18 +2,21 @@ from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from database.models.user import SysUser, UserPayer
-from database.query.db_user import add_user, add_user_payer, get_user_payer_points_by_payer_id, update_user_payer, get_user_payers
+from database.query.db_user import add_user, add_user_payer, get_user_payer_points_by_payer_id, update_user_payer, get_user_payers, update_user_points
 from database.query.db_payer import get_payer_by_name, add_payer, get_payer_list_by_user_id, get_spent_payers_by_user_id
-from schemas.user import AddPointRequest, CreateUserDTO, SpendPointRequest, SpendPointResponse
+from schemas.user import AddPointRequest, CreateUserDTO, SpendPointRequest, SpendPointResponse, UpdatePointDTO, UpdatePointRequest
 from schemas.payer import NewPayerDTO
 from constant import response_message
 from sqlalchemy.exc import SQLAlchemyError
+
+from services.payer_service import create_payer
 
 async def create_user(db:Session, request:CreateUserDTO) -> SysUser:
     new_user = SysUser(username=request.username,balance=request.balance)
     return await add_user(db=db, new_user=new_user)
 
 async def add_points_service(request: AddPointRequest, current_user_id: int, db: Session):
+    print(current_user_id)
     # check the format of the request
     payer_name = request.payer
     added_points = request.points
@@ -25,13 +28,13 @@ async def add_points_service(request: AddPointRequest, current_user_id: int, db:
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail= response_message.INVALID_TIMESTAMP
         )
-    # add payer if it does not exit
+        
+    # add payer if it does not exist
     payer = await get_payer_by_name(db, payer_name)
     if not payer:
-        payer_dto = NewPayerDTO(name=payer_name)
-        payer = await add_payer(db=db, new_payer_dto=payer_dto)
+        payer = await create_payer(payer_name=payer_name, db=db)
     
-    # check if adding points to current amount of point of user from a payer (since added points can be negative) 
+    # check if adding points to current amount of point of user from a payer (since added points can be negative) (can be improved)
     points_from_payer = await get_user_payer_points_by_payer_id(db, current_user_id, payer.id)
     if ((not points_from_payer and added_points < 0) or 
         (points_from_payer and (points_from_payer + added_points) < 0)):
@@ -111,3 +114,32 @@ async def get_balance_service(
     for points, payer in payer_list:
         balance[payer] = points
     return balance
+
+# Update points of one user from one payer, may be update the wrong point, updated admin by 
+async def update_user_payer(request: UpdatePointRequest, current_user_id: int, db: Session):
+    payer = await get_payer_by_name(db = db, name= request.payer)
+    if not payer:
+        raise HTTPException(
+            status_code = status.HTTP_404_NOT_FOUND,
+            detail= response_message.PAYER_NOT_FOUND_ERROR
+        )
+        
+    date = request.timestamp
+    try:
+        date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ")
+    except:
+        raise HTTPException(
+            status_code= status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail= response_message.INVALID_TIMESTAMP
+        )
+        
+    update_point_dto = UpdatePointDTO(
+        user_id=request.user_id,
+        payer_id= payer.id,
+        timestamp = date,
+        points= request.points,
+        update_by= current_user_id,
+    )
+    
+    await update_user_points(db=db, update_dto=update_point_dto)
+    return response_message.USER_PAYER_UPDATED_SUCCESS

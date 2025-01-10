@@ -11,6 +11,12 @@ class AddPointRequest(BaseModel):
     points: int 
     timestamp: str
     
+class UpdatePointRequest(BaseModel):
+    user_id: int
+    payer: str
+    points: int 
+    timestamp: str
+    
 class SpendPointRequest(BaseModel):
     points: int
     
@@ -18,3 +24,9 @@ class SpendPointResponse(BaseModel):
     payer: str
     points: int
     
+class UpdatePointDTO(BaseModel):
+    user_id: int
+    payer_id: int
+    points: int
+    timestamp: datetime
+    update_by: int

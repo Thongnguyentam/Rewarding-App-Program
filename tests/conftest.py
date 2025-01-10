@@ -29,13 +29,14 @@ app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app)
 
-# Create the test database schema before the tests
+# Create the test database schema before the tests, autouse = True to apply to all functions
 @pytest.fixture(scope="function", autouse=True)
 def setup_database():
     Base.metadata.create_all(bind=engine)
     yield
     Base.metadata.drop_all(bind=engine)
     
+# Auto create a client for this module
 @pytest.fixture(scope="module", autouse=True)
 def test_client():
     yield client

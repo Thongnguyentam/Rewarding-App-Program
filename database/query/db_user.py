@@ -1,8 +1,10 @@
 from datetime import datetime
+from fastapi import HTTPException, status
 from sqlalchemy import func
 from sqlalchemy.orm import Session
+from constant import response_message
 from database.models.user import SysUser, UserPayer
-from schemas.user import CreateUserDTO
+from schemas.user import CreateUserDTO, UpdatePointDTO
 
 async def add_user(db:Session, new_user:CreateUserDTO):
     db.add(new_user)
@@ -30,3 +32,21 @@ async def update_user_payer(db: Session, payer_user_id: int, spent_point: int):
 
 async def get_user_payers(db: Session, user_id: int):
     return db.query(UserPayer).filter(UserPayer.user_id == user_id).all()
+
+async def update_user_points(db: Session, update_dto: UpdatePointDTO):
+    user_payer = (db.query(UserPayer)
+                  .filter(
+                      UserPayer.user_id == update_dto.user_id, 
+                      UserPayer.payer_id == update_dto.payer_id, 
+                      UserPayer.created_at == update_dto.timestamp
+                      ).first()
+                  )
+    if not user_payer:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail= response_message.USER_PAYER_NOT_FOUND)
+        
+    user_payer.points = update_dto.points
+    user_payer.updated_at = datetime.now()
+    
+    db.commit()

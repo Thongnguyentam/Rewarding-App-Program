@@ -3,8 +3,8 @@ from requests import Session
 
 from constant import response_message
 from database.database import get_db
-from schemas.user import AddPointRequest, CreateUserDTO, SpendPointRequest
-from services.user_service import add_points_service, create_user, get_balance_service, spend_points_service
+from schemas.user import AddPointRequest, CreateUserDTO, SpendPointRequest, UpdatePointRequest
+from services.user_service import add_points_service, create_user, get_balance_service, spend_points_service, update_user_payer
 
 
 router = APIRouter(tags=["user"])
@@ -34,6 +34,17 @@ async def get_user_balance(
 ):
     return await get_balance_service(db=db, user_id=current_user_id)
 
+
+@router.put("/update-point-record")
+async def update_user_point_record(
+    request: UpdatePointRequest,
+    db: Session = Depends(get_db)
+):
+    response_message = await update_user_payer(request=request,current_user_id=current_user_id,db=db)
+    return {
+        "detail": response_message
+    }
+    
 @router.post("/new-user")
 async def create_new_user(
     request : CreateUserDTO,
